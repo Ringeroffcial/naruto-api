@@ -1,20 +1,13 @@
 const express = require('express');
 const fs = require('fs');
-const path = require('path');
 const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.static('public')); // ✅ Serve HTML and static files from 'public'
 
 // Read Naruto data
 const data = JSON.parse(fs.readFileSync('narutoshippuden.json', 'utf8'));
-
-// Serve the HTML file on root route
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 
 // API Routes
 app.get('/api/naruto', (req, res) => {
@@ -36,3 +29,4 @@ app.get('/api/naruto/village/:name', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Naruto API running at http://localhost:${PORT}`);
 });
+
